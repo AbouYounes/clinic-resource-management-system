@@ -1,5 +1,6 @@
 package de.clinic.cms.controller;
 
+import de.clinic.cms.dto.AppointmentRequestDTO;
 import de.clinic.cms.entity.Appointment;
 import de.clinic.cms.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class AppointmentController {
     }
 
     @PostMapping
-    public Appointment create(@RequestBody Appointment appointment) {
-        return appointmentService.createAppointment(appointment);
+    public Appointment create(@RequestBody AppointmentRequestDTO dto) {
+        return appointmentService.createAppointment(dto);
     }
 }
