@@ -22,7 +22,7 @@ public class DoctorRequestDTO {
     @NotBlank(message = "Specialisation is required")
     private String specialisation;
 
-    @Pattern(regexp = "^\\\\d{10,15}$", message = "Phone number must be between 10 and 15 digits")
+    @Pattern(regexp = "^\\d{10,15}$", message = "Phone number must be between 10 and 15 digits")
     private String phoneNumber;
 
 
