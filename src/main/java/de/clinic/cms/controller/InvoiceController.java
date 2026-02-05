@@ -3,6 +3,7 @@ package de.clinic.cms.controller;
 import de.clinic.cms.dto.InvoiceRequestDTO;
 import de.clinic.cms.entity.Invoice;
 import de.clinic.cms.service.InvoiceService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class InvoiceController {
     public List<Invoice> getAll() { return invoiceService.getAllInvoices();}
 
     @PostMapping
-    public Invoice create(@RequestBody InvoiceRequestDTO dto) {
+    public Invoice create(@Valid @RequestBody InvoiceRequestDTO dto) {
         return invoiceService.createInvoice(dto);
     }
 }

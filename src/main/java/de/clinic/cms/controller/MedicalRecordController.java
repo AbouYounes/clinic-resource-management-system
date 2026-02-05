@@ -3,6 +3,7 @@ package de.clinic.cms.controller;
 import de.clinic.cms.dto.MedicalRecordRequestDTO;
 import de.clinic.cms.entity.MedicalRecord;
 import de.clinic.cms.service.MedicalRecordService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class MedicalRecordController {
     private final MedicalRecordService medicalRecordService;
 
     @PostMapping
-    public MedicalRecord create(@RequestBody MedicalRecordRequestDTO dto) {
+    public MedicalRecord create(@Valid @RequestBody MedicalRecordRequestDTO dto) {
         return medicalRecordService.createMedicalRecord(dto);
     }
 }

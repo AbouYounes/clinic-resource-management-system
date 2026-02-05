@@ -1,5 +1,6 @@
 package de.clinic.cms.service;
 
+import de.clinic.cms.dto.PatientRequestDTO;
 import de.clinic.cms.entity.Patient;
 import de.clinic.cms.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +24,19 @@ public class PatientService {
 
     /**
      * Saves a new patient or updates an existing one.
-     * @param patient The patient entity to save.
+     * @param dto of the patient entity to save.
      * @return The saved patient entity.
      */
-    public Patient savePatient(Patient patient) {
-        // Business logic (e.g, validation) can be added here
+    public Patient savePatient(PatientRequestDTO dto) {
+        Patient patient = Patient.builder()
+                .firstname(dto.getFirstname())
+                .lastname(dto.getLastname())
+                .email(dto.getEmail())
+                .phoneNumber(dto.getPhoneNumber())
+                .dateOfBirth(dto.getDateOfBirth())
+                .address(dto.getAddress())
+                .build();
+
         return patientRepository.save(patient);
     }
 }

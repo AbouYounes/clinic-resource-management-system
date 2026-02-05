@@ -1,7 +1,9 @@
 package de.clinic.cms.controller;
 
+import de.clinic.cms.dto.DoctorRequestDTO;
 import de.clinic.cms.entity.Doctor;
 import de.clinic.cms.service.DoctorService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +27,7 @@ public class DoctorController {
     }
 
     @PostMapping
-    public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctor) {
-        return ResponseEntity.ok(doctorService.saveDoctor(doctor));
+    public ResponseEntity<Doctor> createDoctor(@Valid @RequestBody DoctorRequestDTO dto) {
+        return ResponseEntity.ok(doctorService.saveDoctor(dto));
     }
 }

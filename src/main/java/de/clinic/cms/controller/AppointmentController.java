@@ -3,6 +3,7 @@ package de.clinic.cms.controller;
 import de.clinic.cms.dto.AppointmentRequestDTO;
 import de.clinic.cms.entity.Appointment;
 import de.clinic.cms.service.AppointmentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class AppointmentController {
     }
 
     @PostMapping
-    public Appointment create(@RequestBody AppointmentRequestDTO dto) {
+    public Appointment create(@Valid @RequestBody AppointmentRequestDTO dto) {
         return appointmentService.createAppointment(dto);
     }
 }

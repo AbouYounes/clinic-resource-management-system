@@ -1,5 +1,6 @@
 package de.clinic.cms.service;
 
+import de.clinic.cms.dto.DoctorRequestDTO;
 import de.clinic.cms.entity.Doctor;
 import de.clinic.cms.repository.DoctorRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,10 +24,18 @@ public class DoctorService {
 
     /**
      * Saves a new doctor or updates an existing one.
-     * @param doctor The doctor entity to save.
+     * @param dto The doctor entity to save.
      * @return The saved doctor entity.
      */
-    public Doctor saveDoctor(Doctor doctor) {
+    public Doctor saveDoctor(DoctorRequestDTO dto) {
+        Doctor doctor = Doctor.builder()
+                .firstname(dto.getFirstname())
+                .lastname(dto.getLastname())
+                .email(dto.getEmail())
+                .specialisation(dto.getSpecialisation())
+                .phoneNumber(dto.getPhoneNumber())
+                .build();
+
         return doctorRepository.save(doctor);
     }
 }
