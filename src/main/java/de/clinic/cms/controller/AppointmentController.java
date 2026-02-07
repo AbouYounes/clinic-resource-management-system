@@ -1,6 +1,7 @@
 package de.clinic.cms.controller;
 
 import de.clinic.cms.dto.AppointmentRequestDTO;
+import de.clinic.cms.dto.AppointmentResponseDTO;
 import de.clinic.cms.entity.Appointment;
 import de.clinic.cms.service.AppointmentService;
 import jakarta.validation.Valid;
@@ -23,7 +24,7 @@ public class AppointmentController {
     }
 
     @PostMapping
-    public Appointment create(@Valid @RequestBody AppointmentRequestDTO dto) {
+    public AppointmentResponseDTO create(@Valid @RequestBody AppointmentRequestDTO dto) {
         return appointmentService.createAppointment(dto);
     }
 }

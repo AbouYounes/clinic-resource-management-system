@@ -16,7 +16,7 @@ public class Invoice {
     private Long id;
 
     private BigDecimal amount;
-    private LocalDateTime issueDate;
+    private LocalDateTime issuedDate;
     private String status; //e.g., PAID, PENDING, CANCELLED
 
     @OneToOne

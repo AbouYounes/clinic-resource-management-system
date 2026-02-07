@@ -1,6 +1,7 @@
 package de.clinic.cms.controller;
 
 import de.clinic.cms.dto.DoctorRequestDTO;
+import de.clinic.cms.dto.DoctorResponseDTO;
 import de.clinic.cms.entity.Doctor;
 import de.clinic.cms.service.DoctorService;
 import jakarta.validation.Valid;
@@ -27,7 +28,7 @@ public class DoctorController {
     }
 
     @PostMapping
-    public ResponseEntity<Doctor> createDoctor(@Valid @RequestBody DoctorRequestDTO dto) {
+    public ResponseEntity<DoctorResponseDTO> createDoctor(@Valid @RequestBody DoctorRequestDTO dto) {
         return ResponseEntity.ok(doctorService.saveDoctor(dto));
     }
 }

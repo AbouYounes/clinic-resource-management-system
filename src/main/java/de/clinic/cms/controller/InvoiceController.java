@@ -1,6 +1,7 @@
 package de.clinic.cms.controller;
 
 import de.clinic.cms.dto.InvoiceRequestDTO;
+import de.clinic.cms.dto.InvoiceResponseDTO;
 import de.clinic.cms.entity.Invoice;
 import de.clinic.cms.service.InvoiceService;
 import jakarta.validation.Valid;
@@ -20,7 +21,7 @@ public class InvoiceController {
     public List<Invoice> getAll() { return invoiceService.getAllInvoices();}
 
     @PostMapping
-    public Invoice create(@Valid @RequestBody InvoiceRequestDTO dto) {
+    public InvoiceResponseDTO create(@Valid @RequestBody InvoiceRequestDTO dto) {
         return invoiceService.createInvoice(dto);
     }
 }

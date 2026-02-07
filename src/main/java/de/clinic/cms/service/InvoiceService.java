@@ -1,10 +1,12 @@
 package de.clinic.cms.service;
 
 import de.clinic.cms.dto.InvoiceRequestDTO;
+import de.clinic.cms.dto.InvoiceResponseDTO;
 import de.clinic.cms.entity.Invoice;
 import de.clinic.cms.entity.Appointment;
+import de.clinic.cms.mapper.InvoiceMapper;
 import de.clinic.cms.repository.InvoiceRepository;
-import de.clinic.cms.repository.AppointementRepository;
+import de.clinic.cms.repository.AppointmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,22 +18,23 @@ import java.util.List;
 public class InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
-    private final AppointementRepository appointementRepository;
+    private final AppointmentRepository appointmentRepository;
+    private final InvoiceMapper invoiceMapper;
 
     public List<Invoice> getAllInvoices() { return invoiceRepository.findAll();}
 
-    public Invoice createInvoice(InvoiceRequestDTO dto) {
+    public InvoiceResponseDTO createInvoice(InvoiceRequestDTO dto) {
         // Business Logic: Check availability or validate IDs if needed
-        Appointment appointment = appointementRepository.findById(dto.getAppointmentId())
+        Appointment appointment = appointmentRepository.findById(dto.getAppointmentId())
                 .orElseThrow(() -> new RuntimeException("Appointment not foud with id: " + dto.getAppointmentId()));
 
         Invoice invoice = Invoice.builder()
-                .issueDate(LocalDateTime.now())
+                .issuedDate(LocalDateTime.now())
                 .amount(dto.getAmount())
                 .status(dto.getStatus())
                 .appointment(appointment)
                 .build();
 
-        return invoiceRepository.save(invoice);
+        return invoiceMapper.toDTO(invoiceRepository.save(invoice));
     }
 }

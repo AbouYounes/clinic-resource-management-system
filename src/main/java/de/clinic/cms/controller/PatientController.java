@@ -1,6 +1,7 @@
 package de.clinic.cms.controller;
 
 import de.clinic.cms.dto.PatientRequestDTO;
+import de.clinic.cms.dto.PatientResponseDTO;
 import de.clinic.cms.entity.Patient;
 import de.clinic.cms.service.PatientService;
 import jakarta.validation.Valid;
@@ -32,7 +33,7 @@ public class PatientController {
      * @return The created patient with 200 OK or 201 Created.
      */
     @PostMapping
-    public ResponseEntity<Patient> createPatient(@Valid @RequestBody PatientRequestDTO dto) {
+    public ResponseEntity<PatientResponseDTO> createPatient(@Valid @RequestBody PatientRequestDTO dto) {
         return ResponseEntity.ok(patientService.savePatient(dto));
     }
 }

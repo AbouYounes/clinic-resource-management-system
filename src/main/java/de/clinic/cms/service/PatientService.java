@@ -1,7 +1,9 @@
 package de.clinic.cms.service;
 
 import de.clinic.cms.dto.PatientRequestDTO;
+import de.clinic.cms.dto.PatientResponseDTO;
 import de.clinic.cms.entity.Patient;
+import de.clinic.cms.mapper.PatientMapper;
 import de.clinic.cms.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import java.util.List;
 public class PatientService {
 
     private final PatientRepository patientRepository;
+    private final PatientMapper patientMapper;
 
     /**
      * Retrieves all patients from the database.
@@ -27,16 +30,14 @@ public class PatientService {
      * @param dto of the patient entity to save.
      * @return The saved patient entity.
      */
-    public Patient savePatient(PatientRequestDTO dto) {
-        Patient patient = Patient.builder()
-                .firstname(dto.getFirstname())
-                .lastname(dto.getLastname())
-                .email(dto.getEmail())
-                .phoneNumber(dto.getPhoneNumber())
-                .dateOfBirth(dto.getDateOfBirth())
-                .address(dto.getAddress())
-                .build();
+    public PatientResponseDTO savePatient(PatientRequestDTO dto) {
+        // 1. Mapping RequestDTO -> Entity
+        Patient patient = patientMapper.toEntity(dto);
 
-        return patientRepository.save(patient);
+        // 2. Business Logic & Saving
+        Patient savedPatient = patientRepository.save(patient);
+
+        // 3. Mapping Entity -> ResponseDTO
+        return patientMapper.toResponseDTO(savedPatient);
     }
 }
